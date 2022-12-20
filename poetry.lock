@@ -98,6 +98,17 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "dill"
+version = "0.3.6"
+description = "serialize all of python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+graph = ["objgraph (>=1.7.2)"]
+
+[[package]]
 name = "flask"
 version = "2.2.2"
 description = "A simple framework for building complex web applications."
@@ -202,6 +213,17 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "multiprocess"
+version = "0.70.14"
+description = "better multiprocessing and multithreading in python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+dill = ">=0.3.6"
+
+[[package]]
 name = "numpy"
 version = "1.23.4"
 description = "NumPy is the fundamental package for array computing with Python."
@@ -233,6 +255,20 @@ qa = ["flake8 (==3.8.3)", "mypy (==0.782)"]
 testing = ["docopt", "pytest (<6.0.0)"]
 
 [[package]]
+name = "pathos"
+version = "0.3.0"
+description = "parallel graph management and execution in heterogeneous computing"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+dill = ">=0.3.6"
+multiprocess = ">=0.70.14"
+pox = ">=0.3.2"
+ppft = ">=1.7.6.6"
+
+[[package]]
 name = "pluggy"
 version = "1.0.0"
 description = "plugin and hook calling mechanisms for python"
@@ -243,6 +279,25 @@ python-versions = ">=3.6"
 [package.extras]
 testing = ["pytest-benchmark", "pytest"]
 dev = ["tox", "pre-commit"]
+
+[[package]]
+name = "pox"
+version = "0.3.2"
+description = "utilities for filesystem exploration and automated builds"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
+name = "ppft"
+version = "1.7.6.6"
+description = "distributed and parallel python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+dill = ["dill (>=0.3.6)"]
 
 [[package]]
 name = "pyflakes"
@@ -478,7 +533,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "f328c469a46d9cb95c79b10c69318f07ccca3f40cc6eb43ef51c87ad2ff1879b"
+content-hash = "d3e743ad347e63d8a344ce835d1519cb9ee5217887c47836adbdef4094ed5990"
 
 [metadata.files]
 aiohttp = []
@@ -490,6 +545,7 @@ charset-normalizer = []
 click = []
 colorama = []
 debugpy = []
+dill = []
 flask = []
 frozenlist = []
 idna = []
@@ -499,10 +555,14 @@ jedi = []
 jinja2 = []
 markupsafe = []
 multidict = []
+multiprocess = []
 numpy = []
 packaging = []
 parso = []
+pathos = []
 pluggy = []
+pox = []
+ppft = []
 pyflakes = []
 pyparsing = []
 python-lsp-jsonrpc = []
