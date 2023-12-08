@@ -1,6 +1,7 @@
 from operator import add
+import copy
 
-part = True
+part = False
 
 if part:
   file = open("input.txt", "r+").read().splitlines()
@@ -13,4 +14,19 @@ if part:
   print(gamma * epsilon)
 else:
   file = open("input.txt", "r+").read().splitlines()
-  
+  oxygen = copy.copy(file)
+  carbon = copy.copy(file)
+  for index in range(len(file[0])):
+    sum = 0
+    for line in oxygen:
+      sum += int(line[index])
+    if len(oxygen) > 1:
+      oxygen = [line for line in oxygen if int(line[index]) == round(sum/len(oxygen)+0.00001)]
+    sum = 0
+    for line in carbon:
+      sum += int(line[index])
+    if len(carbon) > 1:
+      carbon = [line for line in carbon if int(line[index]) != round(sum/len(carbon)+0.00001)]
+  print(carbon)
+  print(oxygen)
+  print(int(oxygen[0], 2) * int(carbon[0], 2))
