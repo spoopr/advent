@@ -1,4 +1,5 @@
-import itertools, re, sys
+import itertools, re
+import numpy as np
 
 part = False
 
@@ -20,7 +21,6 @@ else:
   file = open("input.txt", "r+").read().splitlines()
   instructions = list(file[0])
   nodes = {line.split(" = ")[0]: list(re.findall("[A-Z\d]{3}", line.split(" = ")[1])) for line in file[2:]}
-  positions = [x for x in nodes.keys() if x[2] == "A"]
   finished = {}
   for node in nodes.keys():
     start = node
@@ -30,14 +30,14 @@ else:
       else:
         node = nodes[node][0]
     finished[start] = node
-  asum = 0
-  while not all(map(lambda x : x[2] == "Z", positions)):
-    sys.stdout.write(str(asum))
-    sys.stdout.flush()
-    sys.stdout.write("\r")
-    asum += len(instructions)
-    newPositions = []
-    for position in positions:
-      newPositions.append(finished[position])
-    positions = newPositions
-  print(asum)
+  loop = []
+  for node in finished.keys():
+    if node[2] == "Z":
+      asum = 1
+      start = node
+      node = finished[node]
+      while node[2] != "Z":
+        asum += 1
+        node = finished[node]
+      loop.append(asum)
+  print(np.lcm.reduce(loop) * len(instructions))
